@@ -44,6 +44,7 @@ function dbus_showwindow {
   if [[ "$?" == 0 && "$ws" == "false" ]]; then
     qdbus org.kde.yakuake /yakuake/window toggleWindowState > /dev/null
   fi
+  qdbus org.kde.yakuake /yakuake/tabs org.kde.yakuake.setTabTitle "`qdbus org.kde.yakuake /yakuake/sessions org.kde.yakuake.activeSessionId`" "$name";
 }
 
 #
@@ -85,6 +86,7 @@ Options:
   --help                    Show help about options.
   --workdir <dir>           Set the initial working directory of the new tab to 'dir'
   --hold, --noclose         Do not close the session automatically when the command ends.
+  --name <name>             Set the name of the tab
   -p <property=value>       Change the value of a profile property (only for KDE 4).
   -e <cmd>                  Command to execute.
   -q                        Do not open yakuake window.
@@ -102,6 +104,7 @@ while true; do
     --help) showhelp; exit 0 ;;
     --workdir) pwd="$2"; shift 2 ;;
     --hold|--noclose) hold=1; shift ;;
+    --name) name="$2"; shift 2 ;;
     -p) addprops "$2"; shift 2 ;;
     -e) cmd="$2"; shift 2 ;;
     -q) now=0; shift ;;
