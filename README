@@ -57,6 +57,19 @@ Arguments:
   args                      Arguments passed to command.
 
 
+$ yakuake-session --name "session01"
+
+sets the name of the sesion tab (only set up and tested on dbus)
+
+very useful for things like autoloading all your servers by named tab ie:
+
+#!/bin/bash                                                                                                                                                                                                                                                                                                                 
+notify-send -t 1000 "opening sessions to all Servers" "Sessions being opened to servers"
+yakuake-session --name "webserver" -e ssh -- admin@webserver.com
+yakuake-session --name "dbserver" -e ssh -- admin@dbserver.com
+notify-send -t 1000 "sessions opened" "Sessions opened"
+
+
 Action in Dolphin
 -----------------
 
